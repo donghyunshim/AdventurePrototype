@@ -144,6 +144,15 @@ class AdventureScene extends Phaser.Scene {
         });
     }
 
+    simpleObj(x, y, size, emoji, msg) {
+      this.add.text(this.w * x, this.w * y, emoji)
+      .setFontSize(this.s * size)
+      .setInteractive()
+      .on('pointerover', () => {
+        this.showMessage(msg);
+      })
+    }
+
     onEnter() {
         console.warn('This AdventureScene did not implement onEnter():', this.constructor.name);
     }

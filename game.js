@@ -18,20 +18,8 @@ class Road extends AdventureScene {
         this.gotoScene('lobby');
       })
 
-    let tree = this.add.text(this.w * 0.02, this.w * 0.3, "🌳")
-      .setFontSize(this.s * 20)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("An ordinary tree.");
-      })
-
-    let tree2 = this.add.text(this.w * 0.52, this.w * 0.3, "🌳")
-      .setFontSize(this.s * 20)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("An ordinary tree.");
-      })
-    
+    this.simpleObj(0.02, 0.3, 20, "🌳", "An ordinary tree.");
+    this.simpleObj(0.52, 0.3, 20, "🌳", "An ordinary tree.");
   }
 }
 
@@ -96,27 +84,9 @@ class Lobby extends AdventureScene {
         }
       })
 
-    let door2 = this.add.text(this.w * 0.22, this.w * 0.1, "🚪")
-      .setFontSize(this.s * 10)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("Room 218.");
-      })
-
-    let door3 = this.add.text(this.w * 0.42, this.w * 0.1, "🚪")
-      .setFontSize(this.s * 10)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("Room 219.");
-      })
-
-    let door4 = this.add.text(this.w * 0.62, this.w * 0.1, "🚪")
-      .setFontSize(this.s * 10)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("Room 220.");
-      })
-
+    this.simpleObj(0.22, 0.1, 10, "🚪", "Room 218.");
+    this.simpleObj(0.42, 0.1, 10, "🚪", "Room 219.");
+    this.simpleObj(0.62, 0.1, 10, "🚪", "Room 220.");
   }
 }
 
@@ -137,12 +107,7 @@ class Room extends AdventureScene {
         this.gotoScene('lobby');
       });
 
-    let tv = this.add.text(this.w * 0.3, this.w * 0.3, "📺")
-      .setFontSize(this.s * 10)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("A tv, it does not turn on.");
-      })
+    this.simpleObj(0.3, 0.3, 10, "📺", "A tv, it does not turn on.");
 
     let bed = this.add.text(this.w * 0.02, this.w * 0.3, "🛏️")
       .setFontSize(this.s * 20)
@@ -175,18 +140,21 @@ class Evidence extends AdventureScene {
       .setInteractive()
       .on('pointerover', () => {
         this.showMessage("Turn in the case.");
+        this.tweens.add({
+          targets: suspect,
+          x: '+=' + this.s,
+          repeat: -1,
+          yoyo: true,
+          ease: 'Sine.inOut',
+          duration: 100
+        });
       })
       .on('pointerdown', () => {
           this.showMessage("You successfully catch the murderer.");
           this.gotoScene('outro');
         });
 
-    let evidence = this.add.text(this.w * 0.1, this.w * 0.4, "📁")
-      .setFontSize(this.s * 10)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.showMessage("The evidences you've gathered.");
-      })
+    this.simpleObj(0.1, 0.4, 10, "📁", "The evidences you've gathered.");
   }
 }
 
@@ -210,7 +178,7 @@ class Outro extends Phaser.Scene {
   }
   create() {
     this.add.text(50, 50, "Case Ended.").setFontSize(50);
-    this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
+    this.add.text(50, 100, "Click to restart.").setFontSize(20);
     this.input.on('pointerdown', () => this.scene.start('intro'));
   }
 }
