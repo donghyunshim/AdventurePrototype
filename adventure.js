@@ -153,6 +153,10 @@ class AdventureScene extends Phaser.Scene {
       })
     }
 
+    setTheme(hex) {
+      this.cameras.main.setBackgroundColor(hex);
+    }
+
     onEnter() {
         console.warn('This AdventureScene did not implement onEnter():', this.constructor.name);
     }

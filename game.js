@@ -4,7 +4,7 @@ class Road extends AdventureScene {
   }
 
   onEnter() {
-    this.cameras.main.setBackgroundColor(0x5f5f5f);
+    this.setTheme(0x5f5f5f);
 
     let door = this.add.text(this.w * 0.28, this.h * 0.3, "🚪")
       .setFontSize(this.s * 20)
@@ -29,7 +29,7 @@ class Lobby extends AdventureScene {
   }
 
   onEnter() {
-    this.cameras.main.setBackgroundColor(0x4c3228);
+    this.setTheme(0x4c3228);
 
     let knife = this.add.text(this.w * 0.1, this.w * 0.3, "🔪")
       .setFontSize(this.s * 10)
@@ -95,7 +95,7 @@ class Room extends AdventureScene {
     super("room", "Room 217.");
   }
   onEnter() {
-    this.cameras.main.setBackgroundColor(0x3d251e);
+    this.setTheme(0x3d251e);
     
     let door = this.add.text(this.w * 0.5, this.w * 0.3, "🚪")
       .setFontSize(this.s * 20)
@@ -133,7 +133,7 @@ class Evidence extends AdventureScene {
     super("evidence", "Evidence");
   }
   onEnter() {
-    this.cameras.main.setBackgroundColor(0x222222);
+    this.setTheme(0x222222);
 
     let suspect = this.add.text(this.w * 0.3, this.w * 0.3, "👤")
       .setFontSize(this.s * 20)

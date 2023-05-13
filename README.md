@@ -5,7 +5,7 @@ Code requirements:
 - **2+ scenes *not* based on `AdventureScene`**: Intro, Outro.
 - **2+ methods or other enhancement added to the adventure game engine to simplify my scenes**:
     - Enhancement 1: simpleObj (create a simple object which only has a pointover text).
-    - Enhancement 2: unsatisfied (name the method and explain the use of it).
+    - Enhancement 2: setTheme (simplified method to change background color with hex colors).
 
 Experience requirements:
 - **4+ locations in the game world**: Road, Lobby, Room, Evidence.
