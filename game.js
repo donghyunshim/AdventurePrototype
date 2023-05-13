@@ -41,16 +41,16 @@ class Lobby extends AdventureScene {
   }
 
   onEnter() {
-    this.cameras.main.setBackgroundColor (0x964B00);
+    this.cameras.main.setBackgroundColor(0x4c3228);
 
-    let clip = this.add.text(this.w * 0.1, this.w * 0.3, "🔪")
+    let knife = this.add.text(this.w * 0.1, this.w * 0.3, "🔪")
       .setFontSize(this.s * 10)
       .setInteractive()
       .on('pointerover', () => this.showMessage("An ordinary kitchen knife, it is covered with blood."))
       .on('pointerdown', () => {
         this.showMessage("I better not touch the evidence.");
         this.tweens.add({
-          targets: clip,
+          targets: knife,
           x: '+=' + this.s,
           repeat: 2,
           yoyo: true,
@@ -114,7 +114,7 @@ class Lobby extends AdventureScene {
       .setFontSize(this.s * 10)
       .setInteractive()
       .on('pointerover', () => {
-        this.showMessage("Room 219.");
+        this.showMessage("Room 220.");
       })
 
   }
@@ -125,7 +125,9 @@ class Room extends AdventureScene {
     super("room", "Room 217.");
   }
   onEnter() {
-    this.add.text(this.w * 0.02, this.w * 0.3, "🚪")
+    this.cameras.main.setBackgroundColor(0x3d251e);
+    
+    let door = this.add.text(this.w * 0.5, this.w * 0.3, "🚪")
       .setFontSize(this.s * 20)
       .setInteractive()
       .on('pointerover', () => {
@@ -135,19 +137,56 @@ class Room extends AdventureScene {
         this.gotoScene('lobby');
       });
 
-    let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
+    let tv = this.add.text(this.w * 0.3, this.w * 0.3, "📺")
+      .setFontSize(this.s * 10)
       .setInteractive()
       .on('pointerover', () => {
-        this.showMessage('*giggles*');
-        this.tweens.add({
-          targets: finish,
-          x: this.s + (this.h - 2 * this.s) * Math.random(),
-          y: this.s + (this.h - 2 * this.s) * Math.random(),
-          ease: 'Sine.inOut',
-          duration: 500
-        });
+        this.showMessage("A tv, it does not turn on.");
       })
-      .on('pointerdown', () => this.gotoScene('outro'));
+
+    let bed = this.add.text(this.w * 0.02, this.w * 0.3, "🛏️")
+      .setFontSize(this.s * 20)
+      .setInteractive()
+      .on('pointerover', () => this.showMessage("A bed."))
+      .on('pointerdown', () => {
+        this.showMessage("You see something underneath the bed...");
+        this.tweens.add({
+          targets: bed,
+          y: '+=' + this.s,
+          repeat: 2,
+          yoyo: true,
+          ease: 'Sine.inOut',
+          duration: 100
+        });
+        this.gotoScene('evidence');
+      });
+  }
+}
+
+class Evidence extends AdventureScene {
+  constructor() {
+    super("evidence", "Evidence");
+  }
+  onEnter() {
+    this.cameras.main.setBackgroundColor(0x222222);
+
+    let suspect = this.add.text(this.w * 0.3, this.w * 0.3, "👤")
+      .setFontSize(this.s * 20)
+      .setInteractive()
+      .on('pointerover', () => {
+        this.showMessage("Turn in the case.");
+      })
+      .on('pointerdown', () => {
+          this.showMessage("You successfully catch the murderer.");
+          this.gotoScene('outro');
+        });
+
+    let evidence = this.add.text(this.w * 0.1, this.w * 0.4, "📁")
+      .setFontSize(this.s * 10)
+      .setInteractive()
+      .on('pointerover', () => {
+        this.showMessage("The evidences you've gathered.");
+      })
   }
 }
 
@@ -183,7 +222,7 @@ const game = new Phaser.Game({
     width: 1920,
     height: 1080
   },
-  scene: [Intro, Road, Lobby, Room, Outro],
+  scene: [Intro, Road, Lobby, Room, Evidence, Outro],
   title: "Murder Case Detective",
 });
 
